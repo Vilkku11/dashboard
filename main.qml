@@ -15,7 +15,7 @@ Window {
         Tachometer{
             id: tachometer
             rpm: 0
-            opacity: 0
+            opacity: 0.5
             Behavior on opacity{
                 PropertyAnimation{
                     duration: 2000
@@ -24,7 +24,7 @@ Window {
         }
         Speedometer{
         id: speedometer
-        opacity: 0
+        opacity: 0.5
         x:500 // aloitetaan 500 pikseliä ruudun vasemmasta reunasta
         Behavior on opacity{
             PropertyAnimation{
@@ -62,10 +62,8 @@ Window {
             onButtonClicked: {
                 // käsitellään buttonin signaali (tämä on slot)
                 motorStatusText.text = "Käynnistetty"
-                if(tachometer.rpm < 8000){
-                tachometer.rpm += 1000
-                }else{
-                    tachometer.rpm = 1000
+                if(tachometer.rpm == 0){
+                tachometer.rpm = 500
                 }
                 speedometer.opacity = 1
                 tachometer.opacity = 1
@@ -76,7 +74,31 @@ Window {
             buttonText: "Gas"
             backgroundColor: "blue"
             anchors.bottom: parent.bottom
+            x: 500
+            onButtonClicked: {
+            if(tachometer.rpm < 8000 && tachometer.rpm >= 1000){
+              tachometer.rpm += 1000
+            }
+            if(tachometer.rpm < 1000){
+                tachometer.rpm = 1000
+            }
+            }
 
+
+        }
+        Button {
+            buttonText: "Brake"
+            backgroundColor: "red"
+            anchors.bottom: parent.bottom
+            x: 400
+            onButtonClicked: {
+                if(tachometer.rpm > 0){
+                    tachometer.rpm -= 1000
+                }
+                if(tachometer.rpm < 1000){
+                    tachometer.rpm = 500
+                }
+            }
         }
 
     }
