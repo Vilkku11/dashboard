@@ -4,6 +4,7 @@ Rectangle{
     property string buttonText: ""
     property color backgroundColor: "lightgreen"
     property bool isRunning: false
+    property bool lightOn: false
     // Määritellään buttonin lähettämät tapahtumat (signaalit)
     signal buttonClicked
 

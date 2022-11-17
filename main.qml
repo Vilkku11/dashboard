@@ -32,6 +32,12 @@ Window {
             }
         }
         }
+        Light{
+            id: light
+            opacity: 0
+            x: 480
+            y: 50
+        }
 
 
 
@@ -70,10 +76,10 @@ Window {
                     }
                     speedometer.opacity = 1
                     tachometer.opacity = 1
-                    background.color = "darkgray"
                     isRunning = true
                     brakeButton.opacity = 1
                     gasButton.opacity = 1
+                    lightsButton.opacity = 1
                     startStopButton.backgroundColor = "red"
                 }else{
                     motorStatusText.text = "Not Running"
@@ -81,10 +87,10 @@ Window {
                     speedometer.speed = 0
                     speedometer.opacity = 0.2
                     tachometer.opacity = 0.2
-                    background.color = "black"
                     isRunning = false
                     brakeButton.opacity = 0.5
                     gasButton.opacity = 0.5
+                    lightsButton.opacity = 0.5
                     startStopButton.backgroundColor = "lightgreen"
                 }
 
@@ -122,7 +128,7 @@ Window {
             backgroundColor: "red"
             opacity: 0.5
             anchors.bottom: parent.bottom
-            x: 400
+            x: 395
             onButtonClicked: {
                 if(tachometer.rpm > 0){
                     tachometer.rpm -= 1000
@@ -132,6 +138,25 @@ Window {
                     tachometer.rpm = 500
                     speedometer.speed = 0
                 }
+            }
+        }
+        Button{
+            id: lightsButton
+            buttonText: "Lights"
+            backgroundColor: "orange"
+            opacity: 0.5
+            x:447
+            y:312
+            onButtonClicked: {
+               if(lightOn == false){
+                   lightsButton.backgroundColor = "yellow"
+                   light.opacity = 1
+                   lightOn = true
+               }else{
+                   lightsButton.backgroundColor = "orange"
+                   light.opacity = 0
+                   lightOn = false
+               }
             }
         }
 

@@ -9,5 +9,7 @@
         <file>tacho.png</file>
         <file>Tachometer.qml</file>
         <file>Speedometer.qml</file>
+        <file>lightOn.png</file>
+        <file>Light.qml</file>
     </qresource>
 </RCC>
