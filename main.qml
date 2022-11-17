@@ -88,9 +88,9 @@ Window {
                     speedometer.opacity = 0.2
                     tachometer.opacity = 0.2
                     isRunning = false
-                    brakeButton.opacity = 0.5
-                    gasButton.opacity = 0.5
-                    lightsButton.opacity = 0.5
+                    brakeButton.opacity = 0
+                    gasButton.opacity = 0
+                    lightsButton.opacity = 0
                     startStopButton.backgroundColor = "lightgreen"
                 }
 
@@ -104,7 +104,7 @@ Window {
             buttonText: "Gas"
             backgroundColor: "blue"
             anchors.bottom: parent.bottom
-            opacity: 0.5
+            opacity: 0
             x: 500
             onButtonClicked: {
 
@@ -126,7 +126,7 @@ Window {
             id: brakeButton
             buttonText: "Brake"
             backgroundColor: "red"
-            opacity: 0.5
+            opacity: 0
             anchors.bottom: parent.bottom
             x: 395
             onButtonClicked: {
@@ -144,7 +144,7 @@ Window {
             id: lightsButton
             buttonText: "Lights"
             backgroundColor: "orange"
-            opacity: 0.5
+            opacity: 0
             x:447
             y:312
             onButtonClicked: {
