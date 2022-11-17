@@ -15,7 +15,7 @@ Window {
         Tachometer{
             id: tachometer
             rpm: 0
-            opacity: 0.5
+            opacity: 0.2
             Behavior on opacity{
                 PropertyAnimation{
                     duration: 2000
@@ -24,7 +24,7 @@ Window {
         }
         Speedometer{
         id: speedometer
-        opacity: 0.5
+        opacity: 0.2
         x:500 // aloitetaan 500 pikseliä ruudun vasemmasta reunasta
         Behavior on opacity{
             PropertyAnimation{
@@ -38,7 +38,7 @@ Window {
         Text{
             id: motorStatusText
             color: "white"
-            text: "Sammutettu"
+            text: "Not Running"
             font.pointSize: 20
             anchors.horizontalCenter: parent.horizontalCenter
             Behavior on y { // Määritlelään, miten y.n muutos "käyttäytyy"
@@ -55,48 +55,82 @@ Window {
 
         // Sijoitetaan oma nappula ruudulle
         Button{
+            id: startStopButton
             buttonText: "Start/\nStop"
             backgroundColor: "lightgreen"
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             onButtonClicked: {
                 // käsitellään buttonin signaali (tämä on slot)
-                motorStatusText.text = "Käynnistetty"
-                if(tachometer.rpm == 0){
-                tachometer.rpm = 500
+
+                if(isRunning == false){
+                    motorStatusText.text = "Running"
+                    if(tachometer.rpm == 0){
+                    tachometer.rpm = 500
+                    }
+                    speedometer.opacity = 1
+                    tachometer.opacity = 1
+                    background.color = "darkgray"
+                    isRunning = true
+                    brakeButton.opacity = 1
+                    gasButton.opacity = 1
+                    startStopButton.backgroundColor = "red"
+                }else{
+                    motorStatusText.text = "Not Running"
+                    tachometer.rpm = 0
+                    speedometer.speed = 0
+                    speedometer.opacity = 0.2
+                    tachometer.opacity = 0.2
+                    background.color = "black"
+                    isRunning = false
+                    brakeButton.opacity = 0.5
+                    gasButton.opacity = 0.5
+                    startStopButton.backgroundColor = "lightgreen"
                 }
-                speedometer.opacity = 1
-                tachometer.opacity = 1
-                background.color = "gray"
+
+
+
+
             }
         }
         Button{
+            id: gasButton
             buttonText: "Gas"
             backgroundColor: "blue"
             anchors.bottom: parent.bottom
+            opacity: 0.5
             x: 500
             onButtonClicked: {
-            if(tachometer.rpm < 8000 && tachometer.rpm >= 1000){
-              tachometer.rpm += 1000
+
+
+                if(tachometer.rpm < 8000 && tachometer.rpm >= 1000){
+                tachometer.rpm += 1000
+                speedometer.speed += 1500
+                }
+                if(tachometer.rpm < 1000){
+                    tachometer.rpm = 1000
+                    speedometer.speed = 1000
+                }
             }
-            if(tachometer.rpm < 1000){
-                tachometer.rpm = 1000
-            }
-            }
+
 
 
         }
         Button {
+            id: brakeButton
             buttonText: "Brake"
             backgroundColor: "red"
+            opacity: 0.5
             anchors.bottom: parent.bottom
             x: 400
             onButtonClicked: {
                 if(tachometer.rpm > 0){
                     tachometer.rpm -= 1000
+                    speedometer.speed -= 1500
                 }
                 if(tachometer.rpm < 1000){
                     tachometer.rpm = 500
+                    speedometer.speed = 0
                 }
             }
         }

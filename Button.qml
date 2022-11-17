@@ -3,6 +3,7 @@ import QtQuick 2.15
 Rectangle{
     property string buttonText: ""
     property color backgroundColor: "lightgreen"
+    property bool isRunning: false
     // Määritellään buttonin lähettämät tapahtumat (signaalit)
     signal buttonClicked
 

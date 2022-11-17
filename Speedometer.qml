@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 Item {
-
+    property real speed: 0
     Image {
        width: 500
        height: 500
@@ -12,7 +12,14 @@ Item {
             source: "needleorange.png"
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -0.5* height
-            transformOrigin: Item.bottom
+            rotation: -139 + speed / 1000 * 22
+            transformOrigin: Item.Bottom
+            Behavior on rotation {
+                PropertyAnimation{
+                easing.type: Easing.InSine
+                duration: 500
+            }
+            }
         }
     }
 }
