@@ -62,16 +62,21 @@ Window {
             onButtonClicked: {
                 // käsitellään buttonin signaali (tämä on slot)
                 motorStatusText.text = "Käynnistetty"
-                motorStatusText.y = 450
                 if(tachometer.rpm < 8000){
                 tachometer.rpm += 1000
                 }else{
-                    tachometer.rpm = 0
+                    tachometer.rpm = 1000
                 }
                 speedometer.opacity = 1
                 tachometer.opacity = 1
-                background.color = "lightblue"
+                background.color = "gray"
             }
+        }
+        Button{
+            buttonText: "Gas"
+            backgroundColor: "blue"
+            anchors.bottom: parent.bottom
+
         }
 
     }
