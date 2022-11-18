@@ -91,6 +91,9 @@ Window {
                     brakeButton.opacity = 0
                     gasButton.opacity = 0
                     lightsButton.opacity = 0
+                    lightsButton.backgroundColor = "orange"
+                    lightsButton.lightOn = false
+                    light.opacity = 0
                     startStopButton.backgroundColor = "lightgreen"
                 }
 
